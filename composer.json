@@ -1,0 +1,28 @@
+{
+    "name": "yarm/adminnames",
+    "description": "An add-on for the YARM Reference Manager Application. Contains the admin tool(s) for names",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Herbert Van Uffelen",
+            "email": "herbert.van-uffelen@univie.ac.at"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Yarm\\Adminnames\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yarm\\Adminnames\\AdminNamesServiceProvider"
+            ]
+        }
+    }
+}
