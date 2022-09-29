@@ -6,7 +6,7 @@ use App\Models\Name;
 use App\Models\Group;
 use Illuminate\Http\Request;
 
-class AdminnameController extends Controller
+class AdminnamesController extends Controller
 {
     /**
      * NameController constructor.
