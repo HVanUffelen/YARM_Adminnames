@@ -5,7 +5,7 @@ namespace Yarm\Adminnames\Http\Controllers;
 use App\Models\Name;
 use App\Models\Group;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\;
 
 class AdminnamesController extends Controller
 {
