@@ -42,9 +42,9 @@ class AdminnamesDataCleaningController extends Controller
     public function addDataList()
     {
         if (Auth()->user()->can('admin'))
-            return view('Adminnames::addDataList')->with(self::addUncheckedData(false));
+            return view('adminnames::addDataList')->with(self::addUncheckedData(false));
         elseif (Auth()->user()->can('edit-names'))
-            return view('Adminnames::addDataList')->with(self::addUncheckedData(true));
+            return view('adminnames::addDataList')->with(self::addUncheckedData(true));
     }
 
     static function addDataCleanData($id)
