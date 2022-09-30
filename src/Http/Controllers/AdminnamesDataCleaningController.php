@@ -33,7 +33,7 @@ class AdminnamesDataCleaningController extends Controller
     public function list()
     {
         $q = '';
-        return view('adminnames.duplicateNameCleaningList')->with(self::addDuplicateData($q));
+        return view('adminnames::duplicateNameCleaningList')->with(self::addDuplicateData($q));
     }
 
     static function addDuplicateData($q)
