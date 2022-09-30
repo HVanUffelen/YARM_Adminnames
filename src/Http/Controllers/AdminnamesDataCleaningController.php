@@ -3,6 +3,7 @@
 namespace Yarm\Adminnames\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PaginationController;
 use App\Models\File;
 use App\Models\Group;
 use App\Models\Name;
@@ -27,6 +28,28 @@ class AdminnamesDataCleaningController extends Controller
         //$this->middleware('auth');
         //$this->middleware('can:admin');
         $this->middleware('can:edit-names');
+    }
+
+    public function list()
+    {
+        $q = '';
+        return view('adminnames.duplicateNameCleaningList')->with(self::addDuplicateData($q));
+    }
+
+    static function addDuplicateData($q)
+    {
+        $paginationValue = PaginationController::getPaginationItemCount();
+        $colNames = ['id', 'VIAF_id', 'name', 'first_name', 'checked'];
+
+        // Get all names that are double in the DB
+        // and set 'colnames'
+
+        $data = [
+            'duplicates' => self::makeQuery4SearchDuplicates($q)->paginate($paginationValue),
+            'colNames' => $colNames
+        ];
+
+        return $data;
     }
 
     public function manual(Request $request)
