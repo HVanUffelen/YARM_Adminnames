@@ -69,7 +69,7 @@ class AdminnamesDataCleaningController extends Controller
         if ($request->id) {
             $id = $request->id;
         }
-        return view('dlbt.data_cleaning.names.duplicateNameCleaningManual')->with(self::addDataCleanData($id));
+        return view('adminnames::duplicateNameCleaningManual')->with(self::addDataCleanData($id));
     }
 
     private static function makeQuery4SearchDuplicates($q)
@@ -152,6 +152,75 @@ class AdminnamesDataCleaningController extends Controller
         ];
 
         return $data;
+    }
+
+    public function clean(Request $request)
+    {
+        // dd($request);
+        try {
+            // Get the ID of the selected name
+            $selected_id = $request->id[$request->selected_person];
+            $changed_ids = [];
+
+            foreach ($request->id as $index => $id) {
+                if ($id === "0") {
+                    // Create new name
+                    $newName = new Name;
+                    foreach ($newName->getFillable() as $attribute) {
+                        if ($attribute == 'checked') {
+                            $newName->$attribute = 'true';
+                        } else if (isset($request->$attribute[$index])) {
+                            $newName->$attribute = $request->$attribute[$index];
+                        }
+                    }
+                    $newName->save();
+                    // If this person was selected, overwrite the $selected_id
+                    if ($request->selected_person === $index . '') {
+                        $selected_id = $newName->id;
+                    } else {
+                        array_push($changed_ids, $id);
+                    }
+                } elseif ($request->selected_person != $index . '') {
+                    array_push($changed_ids, $id);
+                }
+            }
+
+            // Loop across all IDs
+            foreach ($request->id as $id) {
+                if (Name::find($id)) {
+                    $name = Name::find($id);
+                    if (isset($name)) {
+                        if ($id != $selected_id) {
+                            // Change the Name_ref table
+                            $name_refs = $name->refs()->get();
+                            foreach ($name_refs as $name_ref) {
+                                $name->refs()->updateExistingPivot($name_ref->id, array('name_id' => $selected_id), true);
+                            }
+                            // Delete old record from Name table
+                            $name->delete();
+                        } // For the selected ID
+                        else {
+                            // Set name to checked
+                            $name->update(['checked' => 'true']);
+                        }
+                    } else {
+                        //TODO Lang
+                        return redirect()->back()->withInput()
+                            ->with('alert-danger', 'No Name with id = ' . $id . ' in Table');
+                    }
+                }
+            }
+
+            // Return to the right view after data is cleaned
+            // TODO Lang
+
+            return redirect('/dlbt/dataCleaningManual')
+                ->with(self::addDataCleanData($selected_id))
+                ->with('alert-success', 'The name(s) with id(s) ' . implode(", ", $changed_ids) . ' have been set to the selected name with id ' . $selected_id . ' successfully');
+
+        } catch (\Throwable $th) {
+            return redirect()->back()->withInput()->with('alert-danger', __('Error. Cleaning data failed'));
+        }
     }
 
     static function addUncheckedData($groups = false)
