@@ -149,7 +149,7 @@ class AdminnamesDataCleaningController extends Controller
             'names' => json_decode($request->data)
         ];
 
-        return view('Adminnames::addDataListConfirm')->with($data);
+        return view('adminnames::addDataListConfirm')->with($data);
     }
 
     public function confirmData(Request $request)
