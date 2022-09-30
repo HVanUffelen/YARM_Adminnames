@@ -30,6 +30,16 @@ class AdminnamesDataCleaningController extends Controller
         $this->middleware('can:edit-names');
     }
 
+    public function setChecked(Request $request)
+    {
+        // Toggle checked on check/uncheck button
+        if (Name::find($request->id)) {
+            $name = Name::find($request->id);
+            $name->checked === 'pending' ? $name->checked = 'false' : $name->checked = 'pending';
+            $name->save();
+        }
+    }
+
     public function list()
     {
         $q = '';
