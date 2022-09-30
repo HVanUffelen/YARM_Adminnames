@@ -19,7 +19,7 @@
             {!! Form::text('search', '', ['class' => 'form-control', 'placeholder' => __('Search by name')]) !!}
         </div>
         <div class="card-body">
-            @include('dlbt.data_cleaning.names.inc.duplicateNameCleaning_data')
+            @include('adminnames::inc.duplicateNameCleaning_data')
         </div>
     </div>
     <input type="hidden" name="type" id="type" value="{{'checkDupsNames'}}"/>

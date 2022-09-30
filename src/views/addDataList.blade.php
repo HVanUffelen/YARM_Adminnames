@@ -15,7 +15,7 @@
             </h3>
         </div>
         <div class="card-body">
-            @include('dlbt.data_cleaning.names.inc.addData_data')
+            @include('adminnames::inc.addData_data')
         </div>
     </div>
     {!! Form::open(['id' => 'wikidataFill', 'action' => '\Yarm\Adminnames\Http\Controllers\AdminnamesDataCleaningController@getData', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
