@@ -62,6 +62,30 @@ class AdminnamesDataCleaningController extends Controller
         return view('dlbt.data_cleaning.names.duplicateNameCleaningManual')->with(self::addDataCleanData($id));
     }
 
+    private static function makeQuery4SearchDuplicates($q)
+    {
+
+        $query = DB::table('names AS a');
+        $query->select('a.name', 'a.first_name', 'a.id', 'a.VIAF_id', 'a.checked');
+        $query->join(
+            DB::raw('(SELECT id, LEFT(first_name, 1) AS firstChar, name FROM names GROUP BY name, firstChar HAVING COUNT(name) > 1) as b'),
+            function ($join) {
+                $join->on('a.name', '=', 'b.name');
+                $join->on('firstChar', '=', DB::raw('LEFT(a.first_name, 1)'));
+            });
+
+        $query->whereIn('checked', ['false', 'auto']);
+
+        // If there is a search string, search in the existing query
+        if ($q != '') {
+            $query->where('a.name', 'like', '%' . $q . '%');
+        }
+        $query->union(self::namesWithCommas($q));
+
+        return $query;
+
+    }
+
     public function addDataList()
     {
         if (Auth()->user()->can('admin'))
