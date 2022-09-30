@@ -86,6 +86,21 @@ class AdminnamesDataCleaningController extends Controller
 
     }
 
+    private static function namesWithCommas($q)
+    {
+
+        $namesWithCommas = Name::select('name', 'first_name', 'id', 'VIAF_id', 'checked')
+            ->where('name', 'like', '%,%');
+
+
+        // If there is a search string, search in the existing query
+        if ($q != '') {
+            $namesWithCommas->where('name', 'like', '%' . $q . '%');
+        }
+
+        return $namesWithCommas;
+    }
+
     public function addDataList()
     {
         if (Auth()->user()->can('admin'))
