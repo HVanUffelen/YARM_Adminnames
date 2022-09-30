@@ -10,7 +10,7 @@ class AdminNamesServiceProvider extends ServiceProvider{
     {
 
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
-        //$this->loadViewsFrom(__DIR__ . '/views','adminnames');
+        $this->loadViewsFrom(__DIR__ . '/views','adminnames');
         //$this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->mergeConfigFrom(__DIR__ . '/config/AdminNames.php','adminnames');
         $this->publishes([
