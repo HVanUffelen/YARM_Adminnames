@@ -19,5 +19,7 @@ Route::group(['namespace'=>'Yarm\Adminnames\Http\Controllers','prefix'=>'dlbt','
         ->name('dataCleaning_list');
     Route::post('/dataCleaningCheck', 'AdminnamesDataCleaningController@setChecked')
         ->name('dataCleaning_check');
+    Route::post('/dataCleaning', 'AdminnamesDataCleaningController@clean')
+        ->name('dataCleaning_clean');
 
 });
