@@ -15,7 +15,7 @@
             </h3>
         </div>
         <div class="card-body">
-            {!! Form::open(['id' => 'wikidataConfirm', 'action' => '\Yarm\Adminnames\Http\Controllers\DataCleaningController@confirmData', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['id' => 'wikidataConfirm', 'action' => '\Yarm\Adminnames\Http\Controllers\AdminnamesDataCleaningController@confirmData', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
             @include('dlbt.data_cleaning.names.inc.addDataConfirm_accordion')
         </div>
     </div>

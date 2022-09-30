@@ -18,7 +18,7 @@
             @include('dlbt.data_cleaning.names.inc.addData_data')
         </div>
     </div>
-    {!! Form::open(['id' => 'wikidataFill', 'action' => '\Yarm\Adminnames\Http\Controllers\DataCleaningController@getData', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+    {!! Form::open(['id' => 'wikidataFill', 'action' => '\Yarm\Adminnames\Http\Controllers\AdminnamesDataCleaningController@getData', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
         {!! Form::hidden('data', null, ['id' => 'wikidata_json', 'type' => 'json']) !!}
         {!! Form::button(__('Get data'),['class'=>'btn btn-primary mt-3 float-right', 'id'=>'getData']) !!}
     {!! Form::close() !!}
