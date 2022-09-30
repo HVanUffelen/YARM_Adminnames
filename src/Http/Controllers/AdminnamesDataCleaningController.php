@@ -149,7 +149,37 @@ class AdminnamesDataCleaningController extends Controller
             'names' => json_decode($request->data)
         ];
 
-        return view('dlbt.data_cleaning.names.addDataListConfirm')->with($data);
+        return view('Adminnames::addDataListConfirm')->with($data);
+    }
+
+    public function confirmData(Request $request)
+    {
+        // dd($request);
+        $changed_ids = [];
+        try {
+            foreach ($request->id as $index => $id) {
+                if (Name::find($id)) {
+                    $name = Name::find($id);
+                    if (isset($name)) {
+                        foreach ($name->getFillable() as $attribute) {
+                            if (isset($request->$attribute[$index])) {
+                                $name->$attribute = $request->$attribute[$index];
+                            }
+                        }
+                        array_push($changed_ids, $id);
+                        $name->update();
+                    } else {
+                        return redirect('/dlbt/addDataList')->with(self::addUncheckedData())
+                            ->with('alert-danger', 'No Name with id = ' . $id . ' in Table');
+                    }
+                }
+            }
+            return redirect('/dlbt/addDataList')->with(self::addUncheckedData())
+                ->with('alert-success', __('The name(s) with id(s) ' . implode(", ", $changed_ids) . ' have been updated successfully.'));
+        } catch (\Throwable $th) {
+            return redirect('/dlbt/addDataList')->with(self::addUncheckedData())
+                ->with('alert-danger', __('Error. Storing data in database failed.'));
+        }
     }
 
 
