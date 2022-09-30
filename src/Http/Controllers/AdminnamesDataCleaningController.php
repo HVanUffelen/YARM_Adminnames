@@ -143,5 +143,14 @@ class AdminnamesDataCleaningController extends Controller
         return $data;
     }
 
+    public function getData(Request $request)
+    {
+        $data = [
+            'names' => json_decode($request->data)
+        ];
+
+        return view('dlbt.data_cleaning.names.addDataListConfirm')->with($data);
+    }
+
 
 }

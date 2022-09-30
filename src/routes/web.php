@@ -9,5 +9,7 @@ Route::group(['namespace'=>'Yarm\Adminnames\Http\Controllers','prefix'=>'dlbt','
         ->name('dataCleaning_manual');
     Route::get('/addDataList', 'AdminnamesDataCleaningController@addDataList')
         ->name('wikidata_list');
+    Route::post('/addDataConfirm', 'AdminnamesDataCleaningController@getData')
+        ->name('get_wikidata');
 
 });
