@@ -13,5 +13,7 @@ Route::group(['namespace'=>'Yarm\Adminnames\Http\Controllers','prefix'=>'dlbt','
         ->name('get_wikidata');
     Route::post('/confirmWikiData', 'AdminnamesDataCleaningController@confirmData')
         ->name('confirm_wikidata');
+    Route::post('/confirmOneWikiData', 'AdminnamesDataCleaningController@confirmOne')
+        ->name('confirm_one_wikidata');
 
 });

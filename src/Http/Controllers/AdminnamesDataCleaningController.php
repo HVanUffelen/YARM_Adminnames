@@ -182,5 +182,27 @@ class AdminnamesDataCleaningController extends Controller
         }
     }
 
+    public function confirmOne(Request $request)
+    {
+        try {
+            json_decode($request);
+            $name = Name::find($request->id);
+            if (isset($name)) {
+                foreach ($name->getFillable() as $attribute) {
+                    if ($attribute == 'checked') {
+                        $name->$attribute = 'true';
+                    } else if ($attribute == 'auto_success') {
+                        $name->$attribute = null;
+                    } else if (isset($request->$attribute)) {
+                        $name->$attribute = $request->$attribute;
+                    }
+                }
+                $name->update();
+            }
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+
 
 }
