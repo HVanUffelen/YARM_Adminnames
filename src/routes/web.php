@@ -5,9 +5,9 @@ Route::group(['namespace'=>'Yarm\Adminnames\Http\Controllers','prefix'=>'dlbt','
         ->name('get_ref_names');
     Route::get('/allUncheckedRefNames', 'AdminnamesController@getUncheckedRefNames')
         ->name('get_unchecked_ref_names');
-    Route::get('/dataCleaningManual', 'DataCleaningController@manual')
+    Route::get('/dataCleaningManual', 'AdminnamesDataCleaningController@manual')
         ->name('dataCleaning_manual');
-    Route::get('/addDataList', 'DataCleaningController@addDataList')
+    Route::get('/addDataList', 'AdminnamesDataCleaningController@addDataList')
         ->name('wikidata_list');
 
 });
