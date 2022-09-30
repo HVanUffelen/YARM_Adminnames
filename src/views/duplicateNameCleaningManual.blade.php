@@ -20,8 +20,8 @@
             </h3>
         </div>
         <div class="card-body">
-            {!! Form::open(['id' => 'dataCleaning', 'action' => 'DataCleaningController@clean', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-            @include('dlbt.data_cleaning.names.inc.duplicateNameCleaningManual_persons')
+            {!! Form::open(['id' => 'dataCleaning', 'action' => '\Yarm\Adminnames\Http\Controllers\AdminnamesDataCleaningController@clean', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+            @include('adminnames::inc.duplicateNameCleaningManual_persons')
             <div class="pb-5 mt-3">
             {{Form::button("<i class='fa-solid fa-plus'></i> ",
          ["id"=>"btn-add-list","class"=>"m-1  float-right btn btn-success shadow-sm rounded-circle", "title"=>"Add a new name field",
