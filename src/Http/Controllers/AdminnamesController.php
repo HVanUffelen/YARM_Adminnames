@@ -29,7 +29,7 @@ class AdminnamesController extends Controller
     public function getRefNames()
     {
         $q = '';
-        return view('ydviews.names.refNames')->with(NameController::addRefNamesData($q, false));
+        return view('ydbviews.names.refNames')->with(NameController::addRefNamesData($q, false));
     }
 
     public function getUncheckedRefNames()
