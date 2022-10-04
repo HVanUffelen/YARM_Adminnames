@@ -214,7 +214,7 @@ class AdminnamesDataCleaningController extends Controller
             // Return to the right view after data is cleaned
             // TODO Lang
 
-            return redirect('/dlbt/dataCleaningManual')
+            return redirect('/' . strtolower(config('yarm.sys_name')) .'/dataCleaningManual')
                 ->with(self::addDataCleanData($selected_id))
                 ->with('alert-success', 'The name(s) with id(s) ' . implode(", ", $changed_ids) . ' have been set to the selected name with id ' . $selected_id . ' successfully');
 
@@ -310,15 +310,15 @@ class AdminnamesDataCleaningController extends Controller
                         array_push($changed_ids, $id);
                         $name->update();
                     } else {
-                        return redirect('/dlbt/addDataList')->with(self::addUncheckedData())
+                        return redirect('/' . strtolower(config('yarm.sys_name')) .'/addDataList')->with(self::addUncheckedData())
                             ->with('alert-danger', 'No Name with id = ' . $id . ' in Table');
                     }
                 }
             }
-            return redirect('/dlbt/addDataList')->with(self::addUncheckedData())
+            return redirect('/' . strtolower(config('yarm.sys_name')) .'/addDataList')->with(self::addUncheckedData())
                 ->with('alert-success', __('The name(s) with id(s) ' . implode(", ", $changed_ids) . ' have been updated successfully.'));
         } catch (\Throwable $th) {
-            return redirect('/dlbt/addDataList')->with(self::addUncheckedData())
+            return redirect('/' . strtolower(config('yarm.sys_name')) .'/addDataList')->with(self::addUncheckedData())
                 ->with('alert-danger', __('Error. Storing data in database failed.'));
         }
     }

@@ -21,6 +21,6 @@
     </div>
         {!! Form::submit(__('Confirm import'), ['class'=>'btn btn-primary mt-3 float-right', 'id'=>'confirmDataImport']) !!}
     {!! Form::close() !!}
-    @include('dlbt.shared.new_person_modal')
+    @include('ydbviews.shared.new_person_modal')
 @endsection
 

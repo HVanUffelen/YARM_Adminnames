@@ -2,7 +2,7 @@
 {{App()->setLocale(Session::get('userLanguage'))}}
 
  @section('content')
-    <a href="{{url('dlbt/dataCleaningManual')}}" class="btn btn-info btn-sm mb-2">@lang('Go to Manual Data Cleaning')</a>
+    <a href="{{url(strtolower(config('yarm.sys_name')). '/dataCleaningManual')}}" class="btn btn-info btn-sm mb-2">@lang('Go to Manual Data Cleaning')</a>
     <div class="card">
         <div class="card-header">
             <h3>@lang('Possible Duplicates')

@@ -2,7 +2,7 @@
 {{App()->setLocale(Session::get('userLanguage'))}}
 
  @section('content')
-    <a href="{{url('dlbt/dataCleaningList')}}" class="btn btn-info text-light btn-sm mb-3">@lang('Go to list of possible duplicates')</a>
+    <a href="{{url(strtolower(config('yarm.sys_name')) .'/dataCleaningList')}}" class="btn btn-info text-light btn-sm mb-3">@lang('Go to list of possible duplicates')</a>
     <div class="card">
         <div class="card-header">
             <h3>@lang('Data Cleaning')
@@ -12,7 +12,7 @@
                     data-content="@lang('Data Cleaning manual info')"><i
                         class="fa fa-info-circle"
                         style="color: grey"></i></a>
-                <a href="{{url('dlbt/dataCleaningManual')}}" class="btn btn-danger rounded-circle float-right"
+                <a href="{{url(strtolower(config('yarm.sys_name')) .'/dataCleaningManual')}}" class="btn btn-danger rounded-circle float-right"
                     data-placement="top" data-toggle="popover"
                     data-trigger="hover" data-content="@lang('Clear and refresh data cleaning')">
                     <i class="fa-solid fa-arrows-rotate"></i>
@@ -43,5 +43,5 @@
         {!! Form::close() !!}
     </div>
 
-    @include('dlbt.shared.new_person_modal')
+    @include('ydbviews.shared.new_person_modal')
 @endsection

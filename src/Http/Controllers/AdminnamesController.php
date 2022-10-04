@@ -29,13 +29,13 @@ class AdminnamesController extends Controller
     public function getRefNames()
     {
         $q = '';
-        return view('dlbt.names.refNames')->with(NameController::addRefNamesData($q, false));
+        return view('ydviews.names.refNames')->with(NameController::addRefNamesData($q, false));
     }
 
     public function getUncheckedRefNames()
     {
         $q = '';
-        return view('dlbt.names.refNames')->with(NameController::addRefNamesData($q, true));
+        return view('ydbviews.names.refNames')->with(NameController::addRefNamesData($q, true));
     }
 
 }

@@ -1,5 +1,5 @@
 <?php
-Route::group(['namespace'=>'Yarm\Adminnames\Http\Controllers','prefix'=>'dlbt','middleware'=>['web']], function (){
+Route::group(['namespace'=>'Yarm\Adminnames\Http\Controllers','prefix'=> strtolower(config('yarm.sys_name')),'middleware'=>['web']], function (){
 
     Route::get('/allRefNames', 'AdminnamesController@getRefNames')
         ->name('get_ref_names');
