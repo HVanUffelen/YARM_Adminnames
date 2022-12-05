@@ -1,6 +1,8 @@
 @if (count($uncheckedData) > 0)
     <div id="addDataList" class="adminContent">
         <style>
+            .T-information,
+            .T-address,
             .C-information,
             .C-address{
                 display: none;
@@ -10,7 +12,7 @@
             <thead>
             <tr>
                 @foreach ($colNames as $colName)
-                    <th class="C-{{$colName}}">{{strtoupper(__($colName))}}</th>
+                    <th class="T-{{$colName}}">{{strtoupper(__($colName))}}</th>
                 @endforeach
             </tr>
             </thead>
