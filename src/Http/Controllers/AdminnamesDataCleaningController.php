@@ -227,9 +227,9 @@ class AdminnamesDataCleaningController extends Controller
     {
 
         $specialCharacters = str_split('([|\/])+-=@?!., ');
-        $colNames = ['id', 'WIKIDATA_id', 'name', 'first_name', 'checked'];
+        $colNames = ['id', 'WIKIDATA_id', 'name', 'first_name', 'checked', 'information', 'address'];
 
-        $query = Name::select('name', 'first_name', 'names.id', 'WIKIDATA_id', 'checked');
+        $query = Name::select('name', 'first_name', 'names.id', 'WIKIDATA_id', 'checked', 'information', 'address');
         $query->leftJoin('name_ref', 'names.id', '=', 'name_ref.name_id')
             ->leftJoin('refs', 'refs.id', '=', 'name_ref.ref_id')
             ->rightJoin('group_ref', 'group_ref.ref_id', '=', 'name_ref.ref_id');

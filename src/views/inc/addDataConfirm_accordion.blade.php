@@ -1,6 +1,6 @@
 @php
     $cols = ['id', 'name', 'first_name', 'VIAF_id', 'WIKIDATA_id', 'ISNI_id', 'WIKIDATA_image', 'xLink', 'alternative_names',
-        'gender', 'nationality', 'birth_year', 'death_year'];
+        'gender', 'nationality', 'birth_year', 'death_year', 'information', 'address'];
 @endphp
 <div id="accordion">
     @foreach ($names as $index=>$name)
