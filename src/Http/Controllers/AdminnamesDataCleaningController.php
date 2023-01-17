@@ -214,7 +214,7 @@ class AdminnamesDataCleaningController extends Controller
             // Return to the right view after data is cleaned
             // TODO Lang
 
-            return redirect('/' . strtolower(config('yarm.sys_name')) .'/dataCleaningManual')
+            return redirect('/' . strtolower(config('yarm.sys_name')) . '/dataCleaningManual')
                 ->with(self::addDataCleanData($selected_id))
                 ->with('alert-success', 'The name(s) with id(s) ' . implode(", ", $changed_ids) . ' have been set to the selected name with id ' . $selected_id . ' successfully');
 
@@ -244,9 +244,11 @@ class AdminnamesDataCleaningController extends Controller
             $query->where(function ($query) use ($specialCharacters, $groups) {
                 $query->where(function ($query) use ($specialCharacters, $groups) {
                     //reduce on refs for 'Dutch' and 'Author'
-                    $query->where('refs.language_source_id', '=', 19);
-                    $query->where('refs.primarytxt', '=', 'true');
-                    $query->where('name_ref.role_id', '=', 2);
+                    if (config('DB_DATABASE') == 'yarm4dlbt') {
+                        $query->where('refs.language_source_id', '=', 19);
+                        $query->where('refs.primarytxt', '=', 'true');
+                        $query->where('name_ref.role_id', '=', 2);
+                    }
 
                     $query->whereIn('checked', ['false', 'pending']);
                     $query->where('name', '!=', '');
@@ -271,9 +273,9 @@ class AdminnamesDataCleaningController extends Controller
         }
         $query->groupBy('names.id');
         if (auth()->user()->id == 87)
-            $query->orderBy('name','desc');
+            $query->orderBy('name', 'desc');
         else
-            $query->orderBy('name','asc');
+            $query->orderBy('name', 'asc');
         $query->orderBy('first_name');
 
         $data = [
@@ -310,15 +312,15 @@ class AdminnamesDataCleaningController extends Controller
                         array_push($changed_ids, $id);
                         $name->update();
                     } else {
-                        return redirect('/' . strtolower(config('yarm.sys_name')) .'/addDataList')->with(self::addUncheckedData())
+                        return redirect('/' . strtolower(config('yarm.sys_name')) . '/addDataList')->with(self::addUncheckedData())
                             ->with('alert-danger', 'No Name with id = ' . $id . ' in Table');
                     }
                 }
             }
-            return redirect('/' . strtolower(config('yarm.sys_name')) .'/addDataList')->with(self::addUncheckedData())
+            return redirect('/' . strtolower(config('yarm.sys_name')) . '/addDataList')->with(self::addUncheckedData())
                 ->with('alert-success', __('The name(s) with id(s) ' . implode(", ", $changed_ids) . ' have been updated successfully.'));
         } catch (\Throwable $th) {
-            return redirect('/' . strtolower(config('yarm.sys_name')) .'/addDataList')->with(self::addUncheckedData())
+            return redirect('/' . strtolower(config('yarm.sys_name')) . '/addDataList')->with(self::addUncheckedData())
                 ->with('alert-danger', __('Error. Storing data in database failed.'));
         }
     }
