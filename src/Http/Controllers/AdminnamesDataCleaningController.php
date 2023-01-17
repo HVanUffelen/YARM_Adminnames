@@ -272,11 +272,8 @@ class AdminnamesDataCleaningController extends Controller
             });
         }
         $query->groupBy('names.id');
-        if (auth()->user()->id == 87)
-            $query->orderBy('name', 'desc');
-        else
-            $query->orderBy('name', 'asc');
-        $query->orderBy('first_name');
+        $query->orderBy('name', 'asc');
+        $query->orderBy('first_name', 'asc');
 
         $data = [
             'uncheckedData' => $query->take(20)->get(),
